@@ -10,6 +10,10 @@
     <div class="container">
         <h1>Here is the page.</h1>
         <p>Here is some content.</p>
+        <p>{% for person in people %}
+        	{{ person.name }}<br>
+        	{% endfor %}
+        </p>
     </div>
 
 </body>

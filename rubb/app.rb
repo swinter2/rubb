@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rack'
-require './db'
+require 'liquid'
+require_relative './db'
 
 module Rubb
     class App
@@ -15,7 +16,12 @@ module Rubb
         def route(req)
             if req.path == '/'
                 template = File.read('./views/index.html')
+                template = Liquid::Template.parse(template)
+                # template = template % {:people => Rubb::Data.get_all}
                 # Do some template parsing here if I want.
+                people = Rubb::Data.get_all
+                puts people[0].instance_variables
+                template = template.render('people' => people)
                 return [200, {"Content-Type" => "text/html"}, [template]]
             end
 
