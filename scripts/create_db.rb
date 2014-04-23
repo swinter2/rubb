@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require_relative '../rubb/db'
 
 # Rubb::Data.create_tables
