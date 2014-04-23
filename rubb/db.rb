@@ -1,9 +1,10 @@
+require_relative './settings'
 require 'sqlite3'
-require './models/person'
+require_relative './models/person'
 
 module Rubb
     class Data
-        @@db = "../../data/db.db"
+        @@db = "#{Rubb::PROJROOT}/data/db.db"
 
         def self.create_tables
             db = SQLite3::Database.new @@db
@@ -13,6 +14,24 @@ module Rubb
                     name TEXT
                 )
 SQL
+        end
+
+        def self.add_sample
+            db = SQLite3::Database.new @@db
+            db.execute "INSERT INTO People (id, name) VALUES (1, 'Sam Winter')"
+        end
+
+        def self.get_all
+            db = SQLite3::Database.new @@db
+            rslts = db.execute "SELECT * FROM People"
+            people = []
+            rslts.each do |row|
+                p = Person.new
+                p.id = row[0]
+                p.name = row[1]
+                people.push(p)
+            end
+            people
         end
 
         def self.get_person(id)

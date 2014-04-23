@@ -1,4 +1,4 @@
-require './app'
+require './rubb/app'
 require 'rack'
 
 use Rack::Static, :urls => ['/static'], :root => '.'

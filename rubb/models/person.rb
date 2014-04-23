@@ -6,6 +6,10 @@ module Rubb
             @name = name
         end
 
+        def to_s
+        	"(#{@id} - #{@name})"
+        end
+
         public
         attr_accessor :id, :name
     end
